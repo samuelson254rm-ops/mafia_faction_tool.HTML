@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Grand Mafia Faction Tester</title>
+<style>
+ body {
+  font-family: 'Impact', Arial, sans-serif;
+  background: url('faction_logo.png'), url('smoke_background.jpg');
+  background-size: 120px, cover;
+  background-repeat: no-repeat;
+  background-position: top center, center;
+  color: #f8d29a;
+  padding: 20px;
+  text-shadow: 2px 2px 4px #000;
+ }
+ .box {
+  background: rgba(20, 0, 0, 0.85);
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 420px;
+  margin: auto;
+  border: 2px solid crimson;
+  box-shadow: 0 0 15px black;
+ }
+ input, button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
+ }
+ input {
+  background: #330000;
+  color: #f8d29a;
+ }
+ button {
+  background: linear-gradient(to right, #660000, #990000);
+  color: gold;
+  cursor: pointer;
+  font-weight: bold;
+  border: 1px solid gold;
+ }
+ button:hover {
+  background: #bb0000;
+ }
+ .hidden { display:none; }
+ #result {
+  white-space: pre-line;
+  margin-top: 15px;
+  font-size: 18px;
+ }
+ .share {
+  background: darkgreen;
+ }
+</style>
+</head>
+<body>
+<audio id="gunSound" src="gun_click.mp3"></audio>
+<audio id="mafiaMusic" src="mafia_theme.mp3" loop></audio>
+
+<div class="box">
+ <h2>Grand Mafia Faction Tester</h2>
+ <button onclick="playMusic()">Play Mafia Theme</button>
+
+ <div id="step1">
+  <label>Your in-game name:</label>
+  <input id="nameInput" type="text" />
+  <button onclick="next1()">Next</button>
+ </div>
+
+ <div id="step2" class="hidden">
+  <label>Why did you join our faction?</label>
+  <input id="q1" type="text" />
+  <button onclick="next2()">Next</button>
+ </div>
+
+ <div id="step3" class="hidden">
+  <label>What do you value most? (Power / Loyalty / Money / Respect)</label>
+  <input id="q2" type="text" />
+  <button onclick="next3()">Next</button>
+ </div>
+
+ <div id="step4" class="hidden">
+  <label>Your strongest skill in-game?</label>
+  <input id="q3" type="text" />
+  <button onclick="next4()">Next</button>
+ </div>
+
+ <div id="step5" class="hidden">
+  <label>If attacked, what is your first reaction?</label>
+  <input id="q4" type="text" />
+  <button onclick="finishTest()">Finish</button>
+ </div>
+
+ <div id="result" class="hidden"></div>
+ <button class="share hidden" id="shareBtn" onclick="shareResult()">Share Result</button>
+</div>
+
+<script>
+function gun(){document.getElementById("gunSound").play();}
+function playMusic(){document.getElementById("mafiaMusic").play();}
+
+function rand(arr){return arr[Math.floor(Math.random()*arr.length)];}
+
+const quotes = [
+ "A true boss moves in silence.",
+ "Loyalty is worth more than gold.",
+ "Power belongs to those who take it.",
+ "Respect is earned in the shadows.",
+ "Trust no one outside the family."
+];
+
+const missions = [
+ "Help 2 members today.",
+ "Donate resources to the faction.",
+ "Win 1 street fight.",
+ "Scout any enemy turf.",
+ "Send a rally boost if needed.",
+ "Eliminate a rogue enemy agent."
+];
+
+const ranks = ["Enforcer", "Lieutenant", "Shadow Operative", "Advisor", "Elite Member", "Silent Executioner"];
+
+function next1(){if(!nameInput.value.trim()) return; gun(); step1.classList.add('hidden'); step2.classList.remove('hidden');}
+function next2(){if(!q1.value.trim()) return; gun(); step2.classList.add('hidden'); step3.classList.remove('hidden');}
+function next3(){if(!q2.value.trim()) return; gun(); step3.classList.add('hidden'); step4.classList.remove('hidden');}
+function next4(){if(!q3.value.trim()) return; gun(); step4.classList.add('hidden'); step5.classList.remove('hidden');}
+
+function finishTest(){
+ if(!q4.value.trim()) return;
+ gun();
+ step5.classList.add('hidden');
+
+ const name = nameInput.value;
+ const quote = rand(quotes);
+ const mission = rand(missions);
+ const rank = rand(ranks);
+
+ const resultText = `Welcome back, ${name}.
+Your assigned rank: ${rank}.
+Mafia wisdom: ${quote}
+Your mission: ${mission}`;
+
+ result.innerText = resultText;
+ result.classList.remove('hidden');
+ shareBtn.classList.remove('hidden');
+ window.finalResult = resultText;
+}
+
+function shareResult(){
+ const msg = encodeURIComponent(window.finalResult);
+ window.location.href = `https://wa.me/?text=${msg}`;
+}
+</script>
+</body>
+</html>
