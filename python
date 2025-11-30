@@ -1,0 +1,61 @@
+from colorama import Fore,Style,init
+init(autoreset=True)
+def ask_questions():
+    name=input(Fore.MAGENTA+Style.BRIGHT+'Enter your name: ')
+    while name not in ['Hideaway', 'Gulag', 'Dukey79', 'Unspoken', 'Golden_creed']:
+        print(Fore.RED + Style.BRIGHT + 'Only F2P members are allowed to enter name.')
+        name = input(Fore.MAGENTA + Style.BRIGHT + 'Enter your name: ')
+
+    print(Fore.CYAN + 'Welcome ' + name + '🪽🪽🪽🧙🧙‍♂️' + Fore.BLUE + 'answer the questions below')
+    positions = {
+        'A': 'On Duty R5',
+        'B': 'Commanders',
+        'C': 'ActiveElite',
+        'D': 'Activepros',
+        'E': 'Bootcamper',
+         'On Duty R5':'On Duty R5' # Accept full text input
+    }
+
+    print(Fore.YELLOW + Style.BRIGHT + 'What is your position in F2P?')
+    for key, value in positions.items():
+        if len(key) == 1:  # Only show lettered options
+            print(Fore.CYAN + f"{key}. {value}")
+
+    choice = input(Fore.MAGENTA + Style.BRIGHT + 'Enter your choice (A–E): ').strip().upper()
+
+    while choice not in positions:
+        print(Fore.RED + Style.BRIGHT + 'Invalid choice. Please select a valid letter (A–E).')
+        choice = input(Fore.MAGENTA + Style.BRIGHT + 'Enter your choice (A–E): ').strip().upper()
+
+    print(Fore.GREEN + Style.BRIGHT + f'\nYou have chosen: {positions[choice]} 🫡🪽🧙‍♂️')
+    mayor={
+      'A': 'Hideaway',
+      'B': 'Gulag',
+      'c': 'Unspoken',
+      'D': 'Rabbit Startover',
+      'E': 'Dukey79',
+        'Hideaway':'Hideaway', #Accept full text input
+
+    }
+    print(Fore.LIGHTBLUE_EX +'Who do you think is best suited for mayor position')
+    for key, value in mayor.items():
+        if len(key) == 1:  # Only show lettered options
+            print(Fore.CYAN + f"{key}. {value}")
+
+    choice = input(Fore.MAGENTA + Style.BRIGHT + 'Enter your choice (A–E): ').strip().upper()
+
+    while choice not in mayor:
+        print(Fore.RED + Style.BRIGHT + 'Invalid choice. Please select a valid letter (A–E).')
+        choice = input(Fore.MAGENTA + Style.BRIGHT + 'Enter your choice (A–E): ').strip().upper()
+
+    print(Fore.GREEN + Style.BRIGHT + f'\nYou have chosen: {mayor[choice]} 🫡🪽🧙‍♂️') 
+    print(Fore.LIGHTMAGENTA_EX + Style.BRIGHT + '\nThank you for participating in the survey! Your responses have been recorded. 🫡🪽🧙‍♂️')
+
+
+# Run the function
+
+
+# Run the function
+
+
+ask_questions()
